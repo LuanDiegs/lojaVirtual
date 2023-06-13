@@ -74,6 +74,12 @@
                 <?php
                     while ($dado = $resultado->fetch(PDO::FETCH_ASSOC))
                     {
+                        $codigoProduto = $dado['codigo_prod'];
+                        $qtdeProduto = $dado['quantidade'];
+
+                        if($qtdeProduto > 0){
+
+                        
                 ?>
 
                 <div class="col-sm-4">
@@ -84,16 +90,14 @@
                             <p class="card-text"><?=$dado["descricao"]; ?></p>
                             <p style = "color:red; font-weight: bold;">R$ <?=$dado["valor_unitario"]; ?></p>
 
-                            <form method="POST" action="Funcoes/Carrinho/insereCarrinho.php">
-                                <input type="hidden" value="<?=$dado["codigo_prod"]; ?>" name="codProduto" id="codProduto">
-                                <button type="submit" style = "width: 100%;" href="#" class="btn btn-outline-success">Comprar</button>
-                            </form>
+                            <a href="itensDetalhado.php?produto=<?=$codigoProduto?>" style = "width: 100%;" class="btn btn-success">Detalhes</a>
 
                         </div>
                     </div>
                 </div>
                 
                 <?php
+                        }
                     
                     }
                 ?>
