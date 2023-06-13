@@ -127,6 +127,18 @@
                         <div class="carousel-inner">
                             <?php        
                                 $slide = 0; 
+
+                                //Conta as colunas do resultado, caso for 0 ele exibirá uma imagem padrão;
+                                $count = $resultadoImagem->rowCount();
+
+                                if($count == 0){
+                                ?>
+                                    <img class="d-block w-100" src="<?=carregaImagem('res/img/padrao.jpg');?>">
+
+                                <?php
+
+                                }
+
                                 while($imagem = $resultadoImagem->fetch(PDO::FETCH_ASSOC))
                                 {
                                     if($slide == 0){
@@ -166,8 +178,10 @@
                     <h1 style="text-align:center"><?=$produto['nome_pro']?></h1>
                     <hr>
 
-                    <h3> Preço: <?=$produto['valor_unitario']?> </h3>
-                    <h3> Estoque disponível: <?=$produto['quantidade']?> </h3>
+                    <h3> Preço: R$ <?=$produto['valor_unitario']?> </h3>
+                    <h4> Estoque disponível: <?=$produto['quantidade']?> </h4>
+
+                    <p style="margin-top: 5%; margin-bottom: 5%;"> Descrição do produto: <?=$produto['descricao']?> <p>
 
                     <form method="POST" action="Funcoes/Carrinho/insereCarrinho.php">
                         <input type="hidden" value="<?=$produto["codigo_prod"]; ?>" name="codProduto" id="codProduto">

@@ -29,7 +29,8 @@
 
         }catch (Exception $ex) {
             echo $ex->getMessage();
-            header("location: ../../index.php");
+            //header("location: ../../index.php");
+            die();
         }
 
         header("location: ./inserirPedido.php?cliente=$cpf&valorTotal=$valorTotal&valorFrete=$valorFrete");

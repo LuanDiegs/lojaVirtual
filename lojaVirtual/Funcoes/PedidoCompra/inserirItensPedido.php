@@ -36,9 +36,11 @@
                     $quantidade
                 )";
 
-                echo $sql;
+                $bd->query($sql);
 
-                $resultado = $bd->query($sql);
+                //Atualiza a quantidade dos itens no carrinho
+                $sqlItensUpdate = "UPDATE produto SET quantidade=quantidade-$quantidade WHERE codigo_prod='$codigo'";
+                $bd->query($sqlItensUpdate);
             }
         }catch (Exception $ex) {
 
@@ -46,6 +48,7 @@
             die();
         }
 
+        unset($_SESSION['carrinho']);
         header("location: ../../index.php");
     }
 ;?>
