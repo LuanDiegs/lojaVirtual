@@ -93,15 +93,16 @@
                 ?>
 
                 <div class="col-sm-4">
-                    <div class="card" style="width: 20rem; margin: 5%;">
+                    <div class="card" style="width: 20rem; height: 550px; margin: 5%;">
                         <img class="card-img-top" style = "height: 300px;" src="<?=carregaImagem('res/img/'.$nomeArquivo.'.jpg');?>">
-                        <div class="card-body">
+                        <div class="card-body" style="d-flex flex-column">
                             <h5 class="card-title"><?=$dado["nome_pro"]; ?></h5>
                             <p class="card-text"><?=$dado["descricao"]; ?></p>
                             <p style = "color:red; font-weight: bold;">R$ <?=$dado["valor_unitario"]; ?></p>
-
+                        </div>
+                        
+                        <div class="card-footer">
                             <a href="itensDetalhado.php?produto=<?=$codigoProduto?>" style = "width: 100%;" class="btn btn-success">Detalhes</a>
-
                         </div>
                     </div>
                 </div>
