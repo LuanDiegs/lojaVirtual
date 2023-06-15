@@ -87,9 +87,6 @@
                         <a class="nav-link" style="color: white;" href="index.php">Produtos </span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="#">Carrinho</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" style="color: white;" href="carrinho.php">Carrinho</a>
                     </li>
                 </ul>

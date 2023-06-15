@@ -44,11 +44,13 @@
             ];
 
             $_SESSION['carrinho'][$codigo] = $item;
+            
+        }
+
+        if(empty($_SESSION['frete'])){
+            $_SESSION['frete'] = mt_rand (1*10, 100*10) / 10;
         }
     }
-
-    foreach ($_SESSION['carrinho'] as $carrinho) :
-    endforeach;
 
     header("Location: ../../carrinho.php")
 ?>

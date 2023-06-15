@@ -36,9 +36,6 @@
                     <a class="nav-link" style="color: white;" href="index.php">Produtos </span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="#">Carrinho</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" style="color: white;" href="carrinho.php">Carrinho</a>
                 </li>
             </ul>
@@ -183,7 +180,7 @@
 
                                         <form method="post" action="Funcoes/ProdutoAdmin/editar.php">
 
-                                            <input value="<?=$registroProduto["codigo_prod"]; ?>" type="hidden" class="form-control" name="codProd" id="codProd">
+                                            <input value="<?=$registroProduto["codigo_prod"]; ?>" type="hidden" class="form-control" name="CodProd" id="CodProd">
 
                                             <label for="NmProd">Nome do produto</label>
                                             <input value="<?=$registroProduto["nome_pro"]; ?>" type="text" class="form-control" name="NmProd" id="NmProd" placeholder="Nome do produto">
@@ -195,10 +192,10 @@
                                             <input value="<?=$registroProduto["valor_unitario"];?>" type="text" class="form-control" name="VlUnit" id="VlUnit" placeholder="Valor unitário do produto">
 
                                             <label for="Qtde">Quantidade</label>
-                                            <input value="<?=$registroProduto["quantidade"];?>" required type="number" class="form-control" name="Qtde" id="Qtde" placeholder="Quantidade no estoque">
+                                            <input value="<?=$registroProduto["quantidade"];?>" required type="text" class="form-control" name="Qtde" id="Qtde" placeholder="Quantidade no estoque">
 
                                             <label for="Peso">Peso</label>
-                                            <input value="<?=$registroProduto["peso"];?>" type="number" class="form-control" name="Peso" id="Peso" placeholder="Peso do produto">
+                                            <input value="<?=$registroProduto["peso"];?>" type="text" class="form-control" name="Peso" id="Peso" placeholder="Peso do produto">
 
                                             <label for="Dimens">Dimensões</label>
                                             <input value="<?=$registroProduto["dimensoes"];?>" type="text" class="form-control" name="Dimens" id="Dimens" placeholder="Dimensões do produto">

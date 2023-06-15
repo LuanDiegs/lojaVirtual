@@ -49,6 +49,8 @@
         }
 
         unset($_SESSION['carrinho']);
-        header("location: ../../index.php");
+        unset($_SESSION['frete']);
+
+        header("location: ../../danfe.php?codCompra=$codigoCompra");
     }
 ;?>

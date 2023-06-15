@@ -13,6 +13,7 @@
     $cidade = filter_input(INPUT_POST, "cidade");
     $estado = filter_input(INPUT_POST, "estado");
     $rua = filter_input(INPUT_POST, "rua");
+    $transportadora = filter_input(INPUT_POST, "trans");
 
     $valorTotal = $_GET["valorTotal"];
     $valorFrete = $_GET["valorFrete"];
@@ -32,7 +33,7 @@
             die();
         }
 
-        header("location: ./inserirPedido.php?cliente=$cpf&valorTotal=$valorTotal&valorFrete=$valorFrete");
+        header("location: ./inserirPedido.php?cliente=$cpf&valorTotal=$valorTotal&valorFrete=$valorFrete&trans=$transportadora");
     } else {
         header("location: ../../index.php");
     }

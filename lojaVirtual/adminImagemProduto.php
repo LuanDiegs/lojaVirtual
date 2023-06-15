@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos de compra</title>
+    <title>Imagens do produto</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -34,9 +34,6 @@
             <ul class="navbar-nav">
                 <li class="nav-item active">
                     <a class="nav-link" style="color: white;" href="index.php">Produtos </span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: white;" href="#">Carrinho</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: white;" href="carrinho.php">Carrinho</a>

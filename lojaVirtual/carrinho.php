@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos de compra</title>
+    <title>Carrinho de compras</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -42,6 +42,11 @@
 
             //Conectar o banco
             $bd = conexao();
+
+            $sqlTrans = "SELECT * FROM transportadora";
+
+            $resultadoTrans = $bd->query($sqlTrans);
+            $dadoTrans = $resultadoTrans->fetchAll();
         ?>
 
         <nav class="navbar navbar-expand-lg navbar-light" style="background-color: black; color: white;">
@@ -54,9 +59,6 @@
                 <ul class="navbar-nav">
                 <li class="nav-item active">
                         <a class="nav-link" style="color: white;" href="index.php">Produtos </span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: white;" href="#">Carrinho</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" style="color: white;" href="carrinho.php">Carrinho</a>
@@ -73,7 +75,14 @@
                 <!-- Mostrar os produtos -->
                 <?php
                     $valor_total_carrinho = 0;
-                    $valor_frete = mt_rand (1*10, 100*10) / 10;
+
+                    //Ve se o frete está cheio
+                    //A gente tentou com a API dos correios mas não deu mt certo :(
+                    if(empty($_SESSION['frete'])){
+                        $valor_frete = 0.00;
+                    } else {
+                        $valor_frete = $_SESSION['frete'];
+                    }
 
                     foreach ($_SESSION['carrinho'] as $carrinho) :
                         $codigo = $carrinho['cod_prod'];
@@ -132,15 +141,8 @@
                 <?php
                     endforeach;
                 ?>
-
-                <div class="container">
-                    <h2>Total do pedido: <h3 style="color: red">R$ <?=$valor_total_carrinho?></h3></h2>
-                    <br>
-                    <h2>Frete: <h3 style="color: red">R$ <?=$valor_frete?></h3></h2>
-                    <br>
-                </div>
             </div>
-            <form method="POST" action="Funcoes/PedidoCompra/inserirCliente.php?valorTotal=<?=$valor_total_carrinho?>&valorFrete=<?=$valor_frete?>">
+            <form id="formPedido" method="POST" action="Funcoes/PedidoCompra/inserirCliente.php?valorTotal=<?=$valor_total_carrinho?>&valorFrete=<?=$valor_frete?>">
 
                 <h2 style="text-align: left;">Dados do cliente</h2>
                 <hr style="text-align: right; background-color: black;">
@@ -169,8 +171,27 @@
                 <label for="nro">Número</label>
                 <input style="margin-bottom: 2%;" type="number" class="form-control" name="nro" id="nro" placeholder="Numero">
 
-                <button type="submit" style="width: 100%" href="#" class="btn btn-success">Finalizar pedido</a>
+                <label for="trans">Transportadora</label>
+                <select class="form-control" id="trans" name="trans">
+                    <?php
+                        foreach($dadoTrans as $registroTrans){
+                            echo "<option value='" . $registroTrans["cpf_cnpj_transp"]."'>";
+                            echo $registroTrans["nome_tras"];
+                            echo "</option>";
+                        }
+                    ?>
+                </select>
+
+                <br>
+
+                <button type="submit" style="width: 100%" href="#" class="btn btn-success">Finalizar pedido</button>
             </form>
+            <br>
+            <div class="container">
+                <h2>Total do pedido: <h3 style="color: red">R$ <?=$valor_total_carrinho?></h3></h2>
+                <br>
+                <h2>Frete: <h3 style="color: red">R$ <?=$valor_frete?></h3></h2>
+            </div>
         </div>
     </body>
 

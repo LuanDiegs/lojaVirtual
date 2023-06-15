@@ -33,6 +33,6 @@ try{
     die();
 }
 
-header("location: ../..//adminImagemProduto.php?codProd=$codigoProduto");
+header("location: ../../adminImagemProduto.php?codProd=$codigoProduto");
 
 ?>
