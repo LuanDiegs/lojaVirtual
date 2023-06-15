@@ -84,6 +84,22 @@
                         $valor_total = $dado['valor_unitario'] * $carrinho['qt'];
 
                         $valor_total_carrinho += $valor_total;
+
+                        //Pegar a imagem
+                        $sqlImagem = "SELECT *
+                        FROM imagem
+                        WHERE codigo_prod='$codigo'
+                        ORDER BY codigo_prod DESC
+                        LIMIT 1;";
+                            
+                        $resultadoImagem = $bd->query($sqlImagem);
+                        $imagem = $resultadoImagem->fetch(PDO::FETCH_ASSOC);
+
+                        if(is_array($imagem)){
+                            $nomeArquivo = $imagem['nome_arquivo'];
+                        } else {
+                            $nomeArquivo = "padrao";
+                        }
                 ?>
 
                 <div class="container">
@@ -91,13 +107,12 @@
                     <div class="row" style="margin-bottom: 5%; padding: 1%; border: 1px solid black; border-radius: 10px"> 
                         <div class="col-4">
 
-                            <img style="width: 50%;" src="<?=carregaImagem('res/img/'.$dado['codigo_prod'].'.jpg');?>">
+                            <img style="width: 50%;" src="<?=carregaImagem('res/img/'.$nomeArquivo.'.jpg');?>">
 
                         </div>
 
                         <div class="col-4" style="text-align: center; margin-top: 2%;">
-                            <h2 class="card-title"><?=$carrinho['cod_prod']; ?></h2>
-                            <p class="card-text"><?=$dado['nome_pro'];?></p>
+                            <h2 class="card-title"><?=$dado['nome_pro']; ?></h2>
                             <p class="card-text">Quantidade: <?=$carrinho['qt']; ?></p>
                             <p style = "color: red; font-weight: bold; font-size: 20px;">R$ <?=$valor_total?></p>
            
@@ -130,14 +145,14 @@
                 <h2 style="text-align: left;">Dados do cliente</h2>
                 <hr style="text-align: right; background-color: black;">
 
-                <label for="cpf">CPF ou CNPJ</label>
-                <input size="15" maxlength="20" style="margin-bottom: 2%;" type="text" class="form-control" name="cpf" id="cpf" placeholder="Cpf/CNPJ">
+                <label for="cpf">CPF ou CNP*</label>
+                <input required size="15" maxlength="20" style="margin-bottom: 2%;" type="text" class="form-control" name="cpf" id="cpf" placeholder="Cpf/CNPJ">
 
                 <label for="nome">Nome</label>
                 <input style="margin-bottom: 2%;" type="text" class="form-control" name="nome" id="nome" placeholder="Nome">
                 
-                <label for="cep">CEP</label>
-                <input style="margin-bottom: 2%;" onfocusout="pegarDadosCep()" type="text" class="form-control" name="cep" id="cep" placeholder="CEP">
+                <label for="cep">CEP*</label>
+                <input required style="margin-bottom: 2%;" onfocusout="pegarDadosCep()" type="text" class="form-control" name="cep" id="cep" placeholder="CEP">
 
                 <label for="bairro">Bairro</label>
                 <input style="margin-bottom: 2%;" type="text" class="form-control" name="bairro" id="bairro" placeholder="Bairro">
@@ -152,7 +167,7 @@
                 <input style="margin-bottom: 2%;" type="text" class="form-control" name="rua" id="rua" placeholder="Logradouro">
 
                 <label for="nro">Número</label>
-                <input style="margin-bottom: 2%;" type="text" class="form-control" name="nro" id="nro" placeholder="Numero">
+                <input style="margin-bottom: 2%;" type="number" class="form-control" name="nro" id="nro" placeholder="Numero">
 
                 <button type="submit" style="width: 100%" href="#" class="btn btn-success">Finalizar pedido</a>
             </form>

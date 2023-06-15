@@ -77,14 +77,27 @@
                         $codigoProduto = $dado['codigo_prod'];
                         $qtdeProduto = $dado['quantidade'];
 
-                        if($qtdeProduto > 0){
+                        $sqlImagem = "SELECT *
+                            FROM imagem
+                            WHERE codigo_prod='$codigoProduto'
+                            ORDER BY codigo_prod DESC
+                            LIMIT 1;";
+                            
+                        $resultadoImagem = $bd->query($sqlImagem);
+                        $imagem = $resultadoImagem->fetch(PDO::FETCH_ASSOC);
 
-                        
+                        if(is_array($imagem)){
+                            $nomeArquivo = $imagem['nome_arquivo'];
+                        } else {
+                            $nomeArquivo = "padrao";
+                        }
+
+                        if($qtdeProduto > 0){    
                 ?>
 
                 <div class="col-sm-4">
                     <div class="card" style="width: 20rem; margin: 5%;">
-                        <img class="card-img-top" src="<?=carregaImagem('res/img/'.$dado['codigo_prod'].'.jpg');?>">
+                        <img class="card-img-top" style = "height: 300px;" src="<?=carregaImagem('res/img/'.$nomeArquivo.'.jpg');?>">
                         <div class="card-body">
                             <h5 class="card-title"><?=$dado["nome_pro"]; ?></h5>
                             <p class="card-text"><?=$dado["descricao"]; ?></p>

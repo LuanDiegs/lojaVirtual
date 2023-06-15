@@ -29,7 +29,6 @@
 
         }catch (Exception $ex) {
             echo $ex->getMessage();
-            //header("location: ../../index.php");
             die();
         }
 
